@@ -1,0 +1,14 @@
+services:
+  rclone-backup:
+    container_name: rclone-backup
+    image: fyodorvy/rclone-backup:0.4
+    ports:
+      - 8080:8080
+    environment:
+      - CRON_DB_PATH=/crontab-ui
+      - ENABLE_AUTOSAVE=true
+    volumes:
+      - ./config:/root/.config/rclone/
+      - ./data:/data
+      - ./crontab-ui:/crontab-ui
+    restart: always
